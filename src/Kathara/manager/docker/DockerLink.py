@@ -395,7 +395,7 @@ class DockerLink(object):
             str: The name of the Docker bridge in the format "kt-<network.id[:12]>".
         """
         return f"kt-{network.id[:12]}"
-
+    
     @staticmethod
     def get_network_name(link: Link) -> str:
         """Return the name of a Docker network.

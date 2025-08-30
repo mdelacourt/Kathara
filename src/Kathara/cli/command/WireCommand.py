@@ -29,7 +29,7 @@ class WireCommand(Command):
             default=argparse.SUPPRESS,
             help='Show an help message and exit.',
         )
-
+        
         self.parser.add_argument(
             '-s', '--stop',
             required=False,
@@ -47,7 +47,7 @@ class WireCommand(Command):
     def run(self, current_path: str, argv: List[str]) -> None:
         self.parse_args(argv)
         args = self.get_args()
-
+        
         if Setting.get_instance().manager_type != "docker":
             logging.error("wire command requires docker manager")
             sys.exit(1)
@@ -57,5 +57,5 @@ class WireCommand(Command):
             wire.stop_snoop()
         if len(args['cd']) > 0:
             wire.start_snoop()
-            nets = [docker_link.get_network_name(cd) for cd in args['cd']]
+            nets = [cd for cd in args['cd']]
             wire.capture(nets)
